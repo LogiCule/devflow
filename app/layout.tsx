@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk as SpaceGrotesk } from "next/font/google";
 import "./globals.css";
 import React from "react";
 
+import Navbar from "@/components/navigation/navbar";
 import ThemeProvider from "@/context/Theme";
 
 const inter = Inter({
@@ -27,9 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        suppressHydrationWarning
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ThemeProvider
@@ -38,6 +38,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>
