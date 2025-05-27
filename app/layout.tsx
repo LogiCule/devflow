@@ -20,7 +20,7 @@ const spaceGrotesk = SpaceGrotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Dev Overflow",
+  title: "Devflow",
   description: "Question sharing platform for developers",
 };
 
