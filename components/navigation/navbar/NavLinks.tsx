@@ -18,12 +18,13 @@ const NavLinks = ({ isMobileNav = false }: { isMobileNav?: boolean }) => {
         const isActive =
           (pathname.includes(link.route) && link.route.length > 1) ||
           pathname === link.route;
-        if (link.route === "/profile") {
-          if (userId) link.route = `/profile/${userId}`;
-        }
+        const linkRoute =
+          link.route === "/profile" && userId
+            ? `/profile/${userId}`
+            : link.route;
         const LinkComponent = (
           <Link
-            href={link.route}
+            href={linkRoute}
             className={cn(
               isActive
                 ? "primary-gradient rounded-lg text-light-900"
@@ -48,12 +49,14 @@ const NavLinks = ({ isMobileNav = false }: { isMobileNav?: boolean }) => {
             </p>
           </Link>
         );
-        return isMobileNav ? (
-          <SheetClose key={link.label} asChild>
-            {LinkComponent}
-          </SheetClose>
-        ) : (
-          <React.Fragment key={link.label}>{LinkComponent}</React.Fragment>
+        return (
+          <React.Fragment key={link.label}>
+            {isMobileNav ? (
+              <SheetClose asChild>{LinkComponent}</SheetClose>
+            ) : (
+              LinkComponent
+            )}
+          </React.Fragment>
         );
       })}
     </>
