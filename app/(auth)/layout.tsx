@@ -23,6 +23,7 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
           />
         </div>
         {children}
+
         <SocialAuthForm />
       </section>
     </main>
