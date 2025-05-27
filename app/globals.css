@@ -63,6 +63,10 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
 }
 
 @utility background-light850_dark100 {

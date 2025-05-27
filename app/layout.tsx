@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk as SpaceGrotesk } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 import React from "react";
 
-import Navbar from "@/components/navigation/navbar";
+import { auth } from "@/auth";
+import { Toaster } from "@/components/ui/sonner";
 import ThemeProvider from "@/context/Theme";
 
 const inter = Inter({
@@ -22,26 +24,30 @@ export const metadata: Metadata = {
   description: "Question sharing platform for developers",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+      <SessionProvider session={session}>
+        <body
+          className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
+          suppressHydrationWarning
         >
-          <Navbar />
-          {children}
-        </ThemeProvider>
-      </body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster richColors />
+          </ThemeProvider>
+        </body>
+      </SessionProvider>
     </html>
   );
 }
