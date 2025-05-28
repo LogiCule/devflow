@@ -18,7 +18,7 @@ const LocalSearch = ({
   route,
   imgSrc,
   placeholder,
-  otherClasses,
+  otherClasses="",
 }: searchProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
