@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
@@ -8,29 +9,38 @@ const questions = [
   {
     _id: "1",
     title: "Question 1",
-    description: "Content of question 1",
     tags: [
       { _id: "1", name: "React" },
       { _id: "2", name: "Javascript" },
     ],
-    author: { _id: "1", name: "John Doe" },
+    author: {
+      _id: "1",
+      name: "John Doe",
+      imgSrc:
+        "https://cdn.vectorstock.com/i/1000v/51/87/student-avatar-user-profile-icon-vector-47025187.jpg",
+    },
     upvotes: 10,
     answers: 5,
     views: 100,
-    createdAt: new Date(),
+    createdAt: new Date("2024-10-01T10:00:00Z"),
   },
   {
     _id: "2",
     title: "Question 2",
-    description: "Content of question 2",
     tags: [
       { _id: "1", name: "Next.js" },
       { _id: "2", name: "CSS" },
     ],
+    author: {
+      _id: "1",
+      name: "John Doe",
+      imgSrc:
+        "https://cdn1.vectorstock.com/i/1000x1000/51/90/student-avatar-user-profile-icon-vector-47025190.jpg",
+    },
     upvotes: 15,
     answers: 51,
     views: 101,
-    createdAt: new Date(),
+    createdAt: new Date("2023-10-01T12:00:00Z"),
   },
 ];
 interface SearchParams {
@@ -65,7 +75,7 @@ export default async function Home({ searchParams }: SearchParams) {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
-          <h1 key={question._id}>{question.title}</h1>
+          <QuestionCard key={question._id} question={question} />
         ))}
       </div>
     </>
