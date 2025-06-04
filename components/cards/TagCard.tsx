@@ -27,9 +27,7 @@ const TagCard = ({
   handleRemove,
 }: Props) => {
   const iconClass = getDeviconClassName(name);
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-  };
+
   const Content = (
     <>
       <Badge className="subtle-medium background-light800_dark300 text-light400_light500 rounded-md border-none px-4 py-2 uppercase flex flex-row gap-2">
@@ -55,7 +53,7 @@ const TagCard = ({
   );
   if (compact)
     return isButton ? (
-      <button onClick={handleClick} className="flex justify-between gap-2">
+      <button type="button" className="flex justify-between gap-2">
         {Content}
       </button>
     ) : (
