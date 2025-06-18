@@ -1,5 +1,7 @@
 import mongoose, { Mongoose } from "mongoose";
 
+import logger from "./logger";
+
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
@@ -25,16 +27,19 @@ if (!cached) {
 }
 
 const dbConnect = async (): Promise<Mongoose> => {
-  if (cached.conn) return cached.conn;
+  if (cached.conn) {
+    logger.info("Using cached MongoDB connection");
+    return cached.conn;
+  }
   if (!cached.promise) {
     cached.promise = mongoose
       .connect(MONGODB_URI, { dbName: "devflow" })
       .then((result) => {
-        console.log("Connected to MongoDB:");
+        logger.info("Connected to MongoDB:");
         return result;
       })
       .catch((error) => {
-        console.error("MongoDB connection error:", error);
+        logger.error("MongoDB connection error:", error);
         throw error;
       });
   }

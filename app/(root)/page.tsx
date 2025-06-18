@@ -5,6 +5,7 @@ import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
+
 const questions = [
   {
     _id: "1",
@@ -49,6 +50,7 @@ interface SearchParams {
 
 export default async function Home({ searchParams }: SearchParams) {
   const { query = "" } = await searchParams;
+
   const filteredQuestions = questions.filter((question) =>
     question.title.toLowerCase().includes(query?.toLowerCase() || "")
   );
